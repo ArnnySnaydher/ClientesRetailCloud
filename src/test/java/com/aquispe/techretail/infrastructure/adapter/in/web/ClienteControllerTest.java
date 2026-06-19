@@ -155,7 +155,7 @@ class ClienteControllerTest {
                 .content(objectMapper.writeValueAsString(request)))
                 .andExpect(status().isBadRequest())
                 .andExpect(jsonPath("$.status").value(400))
-                .andExpect(jsonPath("$.message").value("Error de validacion en los datos de entrada"))
+                .andExpect(jsonPath("$.message").value("Error de validación en los datos de entrada"))
                 .andExpect(jsonPath("$.errors.nombre").value("El nombre no puede estar vacío"))
                 .andExpect(jsonPath("$.errors.edad").value("La edad debe ser mayor o igual a 0"))
                 .andExpect(jsonPath("$.errors.fechaNacimiento").value("La fecha de nacimiento es obligatoria"));
