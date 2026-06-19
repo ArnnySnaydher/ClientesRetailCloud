@@ -1,0 +1,86 @@
+{
+	"info": {
+		"_postman_id": "a3b93475-4d2c-4977-9878-3837947bf471",
+		"name": "TechRetail - Clients API",
+		"description": "Colección de Postman para el microservicio de gestión de clientes (TechRetail). Incluye la creación de clientes, obtención de KPI de edad y listado con fecha probable de fallecimiento.",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "Crear Cliente",
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n  \"nombre\": \"Arnny\",\n  \"apellido\": \"Quispe\",\n  \"edad\": 27,\n  \"fechaNacimiento\": \"1998-12-18\"\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{BASE_URL}}/clientes",
+					"host": [
+						"{{BASE_URL}}"
+					],
+					"path": [
+						"clientes"
+					]
+				},
+				"description": "Crea un nuevo cliente en la base de datos tras validar los campos de entrada."
+			},
+			"response": []
+		},
+		{
+			"name": "Obtener KPIs",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "{{BASE_URL}}/kpideclientes",
+					"host": [
+						"{{BASE_URL}}"
+					],
+					"path": [
+						"kpideclientes"
+					]
+				},
+				"description": "Retorna el promedio de edad y la desviación estándar de la población de todos los clientes."
+			},
+			"response": []
+		},
+		{
+			"name": "Listar Clientes (Con Expectativa de Vida)",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "{{BASE_URL}}/listclientes",
+					"host": [
+						"{{BASE_URL}}"
+					],
+					"path": [
+						"listclientes"
+					]
+				},
+				"description": "Retorna la lista de todos los clientes incluyendo sus datos personales y su fecha probable de fallecimiento."
+			},
+			"response": []
+		}
+	],
+	"variable": [
+		{
+			"key": "BASE_URL",
+			"value": "http://localhost:8080",
+			"type": "string"
+		}
+	]
+}
