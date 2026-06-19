@@ -1,0 +1,24 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: techretail-service
+  labels:
+    app: techretail-service
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: techretail-service
+  template:
+    metadata:
+      labels:
+        app: techretail-service
+    spec:
+      containers:
+      - name: techretail-service
+        image: us-central1-docker.pkg.dev/techretail-service-gcp/techretail-repo/techretail-service:latest
+        ports:
+        - containerPort: 8080
+        env:
+        - name: SPRING_PROFILES_ACTIVE
+          value: "default"
