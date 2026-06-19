@@ -140,4 +140,24 @@ class ClienteControllerTest {
                 .andExpect(jsonPath("$[0].nombre").value("John"))
                 .andExpect(jsonPath("$[0].fechaProbableMuerte").value("2073-06-18"));
     }
+
+    @Test
+    void shouldReturnBadRequestWhenCreateClienteHasInvalidData() throws Exception {
+        CreaClienteRequest request = CreaClienteRequest.builder()
+                .nombre("") 
+                .apellido("Doe")
+                .edad(-5) 
+                .fechaNacimiento(null) 
+                .build();
+
+        mockMvc.perform(post("/api/creacliente")
+                .contentType(MediaType.APPLICATION_JSON)
+                .content(objectMapper.writeValueAsString(request)))
+                .andExpect(status().isBadRequest())
+                .andExpect(jsonPath("$.status").value(400))
+                .andExpect(jsonPath("$.message").value("Error de validacion en los datos de entrada"))
+                .andExpect(jsonPath("$.errors.nombre").value("El nombre no puede estar vacío"))
+                .andExpect(jsonPath("$.errors.edad").value("La edad debe ser mayor o igual a 0"))
+                .andExpect(jsonPath("$.errors.fechaNacimiento").value("La fecha de nacimiento es obligatoria"));
+    }
 }

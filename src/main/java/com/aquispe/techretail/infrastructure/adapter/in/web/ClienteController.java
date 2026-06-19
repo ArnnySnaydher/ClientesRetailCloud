@@ -10,6 +10,7 @@ import com.aquispe.techretail.infrastructure.adapter.in.web.dto.CreaClienteReque
 import com.aquispe.techretail.infrastructure.adapter.in.web.dto.KpiResponse;
 import com.aquispe.techretail.infrastructure.adapter.in.web.mapper.ClienteMapper;
 
+import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
 
 import io.swagger.v3.oas.annotations.Operation;
@@ -45,7 +46,7 @@ public class ClienteController {
             @ApiResponse(responseCode = "400", description = "Datos de entrada inválidos")
         }
     )
-    public ResponseEntity<ClienteResponse> creaCliente(@RequestBody CreaClienteRequest request) {
+    public ResponseEntity<ClienteResponse> creaCliente(@Valid @RequestBody CreaClienteRequest request) {
         Cliente domain = mapper.toDomain(request);
         Cliente saved = creaClienteUseCase.creaCliente(domain);
         return ResponseEntity.status(HttpStatus.CREATED).body(mapper.toResponse(saved));
